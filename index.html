@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-<title>APEX — Productivity Suite</title>
+<title>APEX — Exam Season Suite</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
@@ -25,7 +25,6 @@
   --text3: #3a3a58;
   --card-bg: #0e0e18;
   --border: rgba(255,255,255,0.05);
-  --w1: #00c853; --w2: #2979ff; --w3: #d500f9; --w4: #ff6d00;
 }
 
 :root[data-theme="light"] {
@@ -45,14 +44,13 @@
   --text3: #8a8aa8;
   --card-bg: #ffffff;
   --border: rgba(0,0,0,0.08);
-  --w1: #008844; --w2: #1a5cff; --w3: #a000cc; --w4: #cc5500;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scrollbar-width:thin;scrollbar-color:var(--s4) var(--bg);}
 body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden;transition:background 0.3s, color 0.3s;}
 
-/* Theme Toggle Button */
+/* Theme Toggle */
 .theme-toggle {
   position: fixed;
   right: 20px;
@@ -72,8 +70,6 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-he
 }
 .theme-toggle:hover { background: var(--accent); color: #000; }
 
-input, select, textarea, button { font-size: 16px; }
-
 /* Sidebar */
 .sidebar {
   position: fixed;
@@ -90,9 +86,7 @@ input, select, textarea, button { font-size: 16px; }
   display: flex;
   flex-direction: column;
 }
-[data-theme="light"] .sidebar {
-  background: rgba(255,255,255,0.98);
-}
+[data-theme="light"] .sidebar { background: rgba(255,255,255,0.98); }
 .sidebar.collapsed { transform: translateX(-100%); }
 .sidebar-toggle {
   position: fixed;
@@ -139,8 +133,8 @@ input, select, textarea, button { font-size: 16px; }
 .page { display: none; }
 .page.on { display: block; }
 
-/* Common Card Styles */
-.tracker-wrap, .task-wrap, .cal-wrap, .prod-wrap, .manifest-wrap, .notes-wrap {
+/* Page Headers */
+.tracker-wrap, .task-wrap, .cal-wrap, .prod-wrap, .schedule-wrap, .manifest-wrap, .notes-wrap {
   padding: 20px 24px;
   max-width: 1400px;
   margin: 0 auto;
@@ -156,11 +150,7 @@ input, select, textarea, button { font-size: 16px; }
 .page-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; color: var(--text); }
 
 /* Schedule Cards */
-.schedule-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+.schedule-container { display: flex; flex-direction: column; gap: 16px; }
 .schedule-day-card {
   background: var(--s1);
   border: 1px solid var(--border);
@@ -175,65 +165,24 @@ input, select, textarea, button { font-size: 16px; }
   font-size: 18px;
   color: var(--accent);
 }
-.schedule-content {
-  padding: 16px 20px;
-  font-size: 13px;
-  line-height: 1.6;
-  color: var(--text2);
-}
+.schedule-content { padding: 16px 20px; font-size: 13px; line-height: 1.6; color: var(--text2); }
 .schedule-content p { margin: 8px 0; }
 
-/* Manifestation Section */
-.manifest-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
+/* Manifestation Cards */
+.manifest-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
 .ritual-card {
   background: var(--s1);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 20px;
 }
-.ritual-card h3 {
-  font-size: 18px;
-  color: var(--accent);
-  margin-bottom: 16px;
-  font-family: 'Bebas Neue', sans-serif;
-}
-.ritual-list {
-  list-style: none;
-  padding: 0;
-}
-.ritual-list li {
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.ritual-list li:before {
-  content: "✨";
-  font-size: 14px;
-}
-.add-ritual-btn {
-  margin-top: 16px;
-  padding: 10px;
-  background: var(--s2);
-  border: 1px dashed var(--border);
-  border-radius: 10px;
-  width: 100%;
-  cursor: pointer;
-  color: var(--text3);
-  font-size: 12px;
-}
+.ritual-card h3 { font-size: 18px; color: var(--accent); margin-bottom: 16px; font-family: 'Bebas Neue', sans-serif; }
+.ritual-list { list-style: none; padding: 0; }
+.ritual-list li { padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+.ritual-list li:before { content: "✨"; font-size: 14px; }
 
-/* Notes Section */
-.notes-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+/* Notes Cards */
+.notes-container { display: flex; flex-direction: column; gap: 16px; }
 .note-card {
   background: var(--s1);
   border: 1px solid var(--border);
@@ -249,29 +198,11 @@ input, select, textarea, button { font-size: 16px; }
   flex-wrap: wrap;
   gap: 10px;
 }
-.note-title {
-  font-weight: 600;
-  font-size: 16px;
-  color: var(--text);
-}
-.note-date {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  color: var(--text3);
-}
-.note-body {
-  padding: 16px 20px;
-  font-size: 13px;
-  color: var(--text2);
-  line-height: 1.5;
-}
-.note-actions {
-  padding: 12px 20px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  gap: 10px;
-}
-.note-edit, .note-delete {
+.note-title { font-weight: 600; font-size: 16px; color: var(--text); }
+.note-date { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text3); }
+.note-body { padding: 16px 20px; font-size: 13px; color: var(--text2); line-height: 1.5; white-space: pre-wrap; }
+.note-actions { padding: 12px 20px; border-top: 1px solid var(--border); display: flex; gap: 10px; }
+.note-edit, .note-delete, .ritual-edit, .ritual-delete {
   background: var(--s3);
   border: none;
   border-radius: 6px;
@@ -280,17 +211,28 @@ input, select, textarea, button { font-size: 16px; }
   font-size: 11px;
   color: var(--text2);
 }
-.note-edit:hover { background: var(--accent); color: #000; }
-.note-delete:hover { background: #ff4444; color: #fff; }
-.add-note-btn {
-  padding: 12px;
-  background: var(--s2);
-  border: 1px dashed var(--border);
-  border-radius: 12px;
-  cursor: pointer;
-  text-align: center;
-  color: var(--text3);
+.note-edit:hover, .ritual-edit:hover { background: var(--accent); color: #000; }
+.note-delete:hover, .ritual-delete:hover { background: #ff4444; color: #fff; }
+
+/* Buttons */
+.btn-primary {
+  background: var(--accent);
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 18px;
   font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn-secondary {
+  background: var(--s3);
+  color: var(--text2);
+  border: 1px solid var(--b1);
+  border-radius: 10px;
+  padding: 8px 18px;
+  font-size: 12px;
+  cursor: pointer;
 }
 
 /* Modal */
@@ -322,8 +264,6 @@ input, select, textarea, button { font-size: 16px; }
 textarea.fi { min-height: 100px; resize: vertical; }
 .fi:focus { border-color: var(--accent); }
 .mactions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px; }
-.btn-cancel { background: var(--s3); color: var(--text2); border: 1px solid var(--b1); border-radius: 10px; padding: 8px 18px; font-size: 12px; cursor: pointer; }
-.btn-save { background: var(--accent); color: #000; border: none; border-radius: 10px; padding: 8px 18px; font-size: 12px; font-weight: 700; cursor: pointer; }
 
 /* Save Indicator */
 .save-indicator {
@@ -343,6 +283,34 @@ textarea.fi { min-height: 100px; resize: vertical; }
 }
 .save-indicator.show { opacity: 1; }
 
+/* Simple Habit Tracker Stats */
+.month-stats { display: flex; gap: 15px; align-items: center; }
+.mstat { text-align: center; background: var(--s2); padding: 8px 16px; border-radius: 12px; }
+.mstat-val { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); }
+.mstat-lbl { font-size: 9px; color: var(--text3); margin-top: 4px; }
+
+/* Calendar Cards */
+.exam-calendar {
+  background: var(--s1);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid var(--border);
+}
+.exam-list { list-style: none; padding: 0; }
+.exam-list li { padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.exam-date { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); min-width: 80px; }
+.exam-title { flex: 1; font-weight: 500; }
+.exam-priority { font-size: 11px; padding: 2px 8px; border-radius: 20px; }
+.priority-high { background: rgba(255,68,68,0.2); color: #ff4444; }
+.priority-low { background: rgba(0,255,157,0.2); color: var(--accent); }
+
+/* Productivity Timer */
+.pcard { background: var(--s1); border-radius: 16px; padding: 24px; text-align: center; border: 1px solid var(--border); }
+.pomo-time { font-family: 'Bebas Neue', sans-serif; font-size: 64px; color: var(--accent); }
+.pomo-controls { display: flex; gap: 16px; justify-content: center; margin-top: 20px; }
+.pbtn { width: 56px; height: 56px; border-radius: 50%; background: var(--s3); border: 1px solid var(--border); color: var(--text2); cursor: pointer; font-size: 20px; transition: all 0.2s; }
+.pbtn:hover { background: var(--accent); color: #000; }
+
 /* Mobile */
 @media (max-width: 767px) {
   .sidebar { width: 85%; max-width: 280px; }
@@ -351,8 +319,9 @@ textarea.fi { min-height: 100px; resize: vertical; }
   .sidebar.collapsed { transform: translateX(-100%); }
   .sidebar-toggle { left: 12px; top: 12px; }
   .theme-toggle { right: 12px; top: 12px; }
-  .tracker-wrap, .task-wrap, .cal-wrap, .prod-wrap, .manifest-wrap, .notes-wrap { padding: 12px; }
+  .tracker-wrap, .task-wrap, .cal-wrap, .prod-wrap, .schedule-wrap, .manifest-wrap, .notes-wrap { padding: 12px; }
   .page-header h1 { font-size: 24px; }
+  .manifest-container { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -372,73 +341,87 @@ textarea.fi { min-height: 100px; resize: vertical; }
     <div class="sidebar-item" data-page="manifest" onclick="gotoPage('manifest',this)"><span class="sidebar-item-icon">✨</span><span class="sidebar-item-text">Manifestation</span></div>
     <div class="sidebar-item" data-page="notes" onclick="gotoPage('notes',this)"><span class="sidebar-item-icon">📝</span><span class="sidebar-item-text">Notes</span></div>
   </div>
-  <div class="sidebar-footer"><div>APEX v3.0</div><div style="font-size:8px; margin-top:4px;">Exam Season Mode</div></div>
+  <div class="sidebar-footer"><div>APEX v3.0</div><div style="font-size:8px; margin-top:4px;">Exam Season Mode · May 26 — Jun 22</div></div>
 </div>
 
 <div class="main-content" id="mainContent">
 
-  <!-- Tracker Page (simplified for space) -->
+  <!-- Tracker Page -->
   <div class="page on" id="page-tracker">
     <div class="tracker-wrap">
       <div class="page-header">
         <h1>📊 Habit Tracker</h1>
-        <div class="month-stats" style="display:flex;gap:15px;">
-          <div class="mstat"><div class="mstat-val" id="stat-habits">4</div><div class="mstat-lbl">HABITS</div></div>
-          <button class="btn-save" onclick="alert('Add habit feature coming')" style="padding:8px 16px;">+ Add</button>
+        <div class="month-stats">
+          <div class="mstat"><div class="mstat-val" id="stat-habits">8</div><div class="mstat-lbl">ACTIVE</div></div>
         </div>
       </div>
-      <div style="background:var(--s1); border-radius:16px; padding:20px; text-align:center; border:1px solid var(--border)">
-        <p style="color:var(--text2)">Habit tracker simplified for exam season.<br>Focus on your schedule below.</p>
+      <div style="background:var(--s1); border-radius:16px; padding:24px; border:1px solid var(--border); text-align:center">
+        <p style="color:var(--text2); margin-bottom:16px">⚡ Exam Season Non-Negotiables:</p>
+        <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center">
+          <span style="background:var(--s2); padding:8px 16px; border-radius:20px; font-size:12px">🌅 06:00 Wake</span>
+          <span style="background:var(--s2); padding:8px 16px; border-radius:20px; font-size:12px">🚿 Cold Shower</span>
+          <span style="background:var(--s2); padding:8px 16px; border-radius:20px; font-size:12px">📖 Fajr + Quran</span>
+          <span style="background:var(--s2); padding:8px 16px; border-radius:20px; font-size:12px">📚 BT Block</span>
+          <span style="background:var(--s2); padding:8px 16px; border-radius:20px; font-size:12px">🌙 Night Session</span>
+          <span style="background:var(--s2); padding:8px 16px; border-radius:20px; font-size:12px">📓 Daily Journal</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Tasks Page (simplified) -->
+  <!-- Tasks Page -->
   <div class="page" id="page-tasks">
     <div class="task-wrap">
-      <div class="page-header"><h1>✅ Daily Tasks</h1></div>
-      <div style="background:var(--s1); border-radius:16px; padding:20px; text-align:center; border:1px solid var(--border)">
-        <p style="color:var(--text2)">Use the Exam Schedule below for your daily structure.<br>Critical tasks are shown there.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Calendar Page (simplified) -->
-  <div class="page" id="page-calendar">
-    <div class="cal-wrap">
-      <div class="page-header"><h1>📅 Exam Calendar</h1></div>
+      <div class="page-header"><h1>✅ Priority Tasks</h1></div>
       <div style="background:var(--s1); border-radius:16px; padding:20px; border:1px solid var(--border)">
-        <div style="margin-bottom:20px"><strong style="color:var(--accent)">📌 Exam Dates:</strong></div>
+        <div style="margin-bottom:20px"><strong style="color:var(--accent)">📌 Exam Priorities:</strong></div>
         <ul style="list-style:none; color:var(--text2)">
-          <li>📚 <strong>Jun 3</strong> - Intro to Aerospace (Low priority)</li>
-          <li>📚 <strong>Jun 9/11</strong> - Spacecraft Structural Mechanics / Computational Methods (HIGH)</li>
-          <li>🚀 <strong>Jun 12</strong> - Rocket Propulsion (HIGH) - No teaching</li>
-          <li>✈️ <strong>Jun 17</strong> - Aircraft Attitude Dynamics (HIGH) - Modified teaching</li>
+          <li style="padding:10px 0; border-bottom:1px solid var(--border)">🔴 <strong>HIGH:</strong> Spacecraft Structural Mechanics — Past papers week 3</li>
+          <li style="padding:10px 0; border-bottom:1px solid var(--border)">🔴 <strong>HIGH:</strong> Rocket Propulsion — Full focus from Jun 9</li>
+          <li style="padding:10px 0; border-bottom:1px solid var(--border)">🔴 <strong>HIGH:</strong> Aircraft Attitude Dynamics — Start after Jun 12</li>
+          <li style="padding:10px 0">🟢 <strong>LOW:</strong> Intro to Aerospace — Broad prep only</li>
         </ul>
       </div>
     </div>
   </div>
 
-  <!-- Productivity Page (simplified) -->
+  <!-- Calendar Page -->
+  <div class="page" id="page-calendar">
+    <div class="cal-wrap">
+      <div class="page-header"><h1>📅 Exam Calendar</h1></div>
+      <div class="exam-calendar">
+        <div style="margin-bottom:20px"><strong style="color:var(--accent)">📅 May 26 — Jun 22</strong></div>
+        <ul class="exam-list">
+          <li><span class="exam-date">Jun 3</span><span class="exam-title">Intro to Aerospace</span><span class="exam-priority priority-low">LOW PRIORITY</span></li>
+          <li><span class="exam-date">Jun 9/11</span><span class="exam-title">Spacecraft Structural Mechanics / Computational Methods</span><span class="exam-priority priority-high">HIGH</span></li>
+          <li><span class="exam-date">Jun 12</span><span class="exam-title">Rocket Propulsion</span><span class="exam-priority priority-high">HIGH · No teaching</span></li>
+          <li><span class="exam-date">Jun 17</span><span class="exam-title">Aircraft Attitude Dynamics</span><span class="exam-priority priority-high">HIGH · Modified teaching</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Productivity Page -->
   <div class="page" id="page-productivity">
     <div class="prod-wrap">
-      <div class="page-header"><h1>🍅 Pomodoro</h1></div>
-      <div class="pcard" style="background:var(--s1); border-radius:16px; padding:24px; text-align:center">
-        <div class="pomo-time" style="font-size:48px; font-family:'Bebas Neue'">25:00</div>
-        <div class="pomo-controls" style="margin-top:20px">
-          <button class="pbtn" style="background:var(--s3); border-radius:50%; width:50px; height:50px">▶️</button>
-          <button class="pbtn" style="background:var(--s3); border-radius:50%; width:50px; height:50px">⏸️</button>
-          <button class="pbtn" style="background:var(--s3); border-radius:50%; width:50px; height:50px">🔄</button>
+      <div class="page-header"><h1>🍅 Focus Timer</h1></div>
+      <div class="pcard">
+        <div class="pomo-time" id="pomo-time">25:00</div>
+        <div class="pomo-phase" style="font-size:12px; color:var(--text3); margin-top:8px">FOCUS</div>
+        <div class="pomo-controls">
+          <button class="pbtn" onclick="startPomodoro()">▶️</button>
+          <button class="pbtn" onclick="pausePomodoro()">⏸️</button>
+          <button class="pbtn" onclick="resetPomodoro()">🔄</button>
         </div>
-        <p style="color:var(--text3); margin-top:16px">Focus on your study blocks! 📚</p>
+        <p style="color:var(--text3); margin-top:20px; font-size:12px">Study in focused blocks. No task switching.</p>
       </div>
     </div>
   </div>
 
   <!-- Exam Schedule Page -->
   <div class="page" id="page-schedule">
-    <div class="manifest-wrap">
-      <div class="page-header"><h1>📋 Exam Season Schedule</h1><div style="font-size:12px; color:var(--accent)">May 26 — Jun 22</div></div>
+    <div class="schedule-wrap">
+      <div class="page-header"><h1>📋 Daily Structure</h1><div style="font-size:12px; color:var(--accent)">May 26 — Jun 22</div></div>
       <div class="schedule-container" id="schedule-container"></div>
     </div>
   </div>
@@ -446,7 +429,7 @@ textarea.fi { min-height: 100px; resize: vertical; }
   <!-- Manifestation Page -->
   <div class="page" id="page-manifest">
     <div class="manifest-wrap">
-      <div class="page-header"><h1>✨ Manifestation</h1><button class="btn-save" onclick="openRitualModal()" style="padding:8px 16px;">+ Add Ritual</button></div>
+      <div class="page-header"><h1>✨ Future Self Rituals</h1><button class="btn-primary" onclick="openRitualModal()">+ Add Ritual</button></div>
       <div class="manifest-container" id="rituals-container"></div>
     </div>
   </div>
@@ -454,7 +437,7 @@ textarea.fi { min-height: 100px; resize: vertical; }
   <!-- Notes Page -->
   <div class="page" id="page-notes">
     <div class="notes-wrap">
-      <div class="page-header"><h1>📝 Daily Notes</h1><button class="btn-save" onclick="openNoteModal()" style="padding:8px 16px;">+ New Note</button></div>
+      <div class="page-header"><h1>📝 Daily Notes</h1><button class="btn-primary" onclick="openNoteModal()">+ New Note</button></div>
       <div class="notes-container" id="notes-container"></div>
     </div>
   </div>
@@ -462,9 +445,9 @@ textarea.fi { min-height: 100px; resize: vertical; }
 </div>
 
 <!-- Modals -->
-<div class="modal-bg" id="ritual-modal"><div class="modal"><div class="modal-title">✨ Add Future Self Ritual</div><div class="fg"><label class="fl">RITUAL TITLE</label><input class="fi" id="ritual-title" placeholder="e.g. Morning Routine"/></div><div class="fg"><label class="fl">DESCRIPTION / HABITS</label><textarea class="fi" id="ritual-desc" placeholder="List your rituals..."></textarea></div><div class="mactions"><button class="btn-cancel" onclick="closeMod('ritual-modal')">Cancel</button><button class="btn-save" onclick="addRitual()">Add</button></div></div></div>
+<div class="modal-bg" id="ritual-modal"><div class="modal"><div class="modal-title">✨ Add Ritual</div><div class="fg"><label class="fl">TITLE</label><input class="fi" id="ritual-title" placeholder="e.g. Morning Champion"/></div><div class="fg"><label class="fl">DESCRIPTION (one per line)</label><textarea class="fi" id="ritual-desc" placeholder="06:00 Wake&#10;Cold Shower&#10;Fajr + Quran"></textarea></div><div class="mactions"><button class="btn-secondary" onclick="closeMod('ritual-modal')">Cancel</button><button class="btn-primary" onclick="addRitual()">Add Ritual</button></div></div></div>
 
-<div class="modal-bg" id="note-modal"><div class="modal"><div class="modal-title">📝 Add Note</div><div class="fg"><label class="fl">DATE</label><input class="fi" id="note-date" type="date" value=""/></div><div class="fg"><label class="fl">TITLE</label><input class="fi" id="note-title" placeholder="Note title..."/></div><div class="fg"><label class="fl">BODY</label><textarea class="fi" id="note-body" placeholder="Write your note here..." rows="5"></textarea></div><div class="mactions"><button class="btn-cancel" onclick="closeMod('note-modal')">Cancel</button><button class="btn-save" onclick="saveNote()">Save Note</button></div></div></div>
+<div class="modal-bg" id="note-modal"><div class="modal"><div class="modal-title">📝 Add Note</div><div class="fg"><label class="fl">DATE</label><input class="fi" id="note-date" type="date" value=""/></div><div class="fg"><label class="fl">TITLE</label><input class="fi" id="note-title" placeholder="Note title"/></div><div class="fg"><label class="fl">BODY</label><textarea class="fi" id="note-body" placeholder="Write your note here..." rows="5"></textarea></div><div class="mactions"><button class="btn-secondary" onclick="closeMod('note-modal')">Cancel</button><button class="btn-primary" onclick="saveNote()">Save Note</button></div></div></div>
 
 <div class="save-indicator" id="save-indicator">✓ Saved</div>
 
@@ -522,7 +505,7 @@ function gotoPage(pageId, el) {
   if (pageId === 'notes') renderNotes();
 }
 
-// ========== SCHEDULE DATA ==========
+// ========== SCHEDULE ==========
 const scheduleData = {
   monday: `📌 MON + WED (Class 10:30 & 16:00)
 • 06:00 Wake → Fajr+Quran (20-25 min) → 06:55 Breakfast
@@ -577,7 +560,7 @@ function renderSchedule() {
       <div class="schedule-day-card">
         <div class="schedule-day-header">📌 ${dayNames[i]}</div>
         <div class="schedule-content">
-          ${scheduleData[days[i]].split('\n').map(line => `<p>${line}</p>`).join('')}
+          ${scheduleData[days[i]].split('\n').map(line => `<p>${escapeHtml(line)}</p>`).join('')}
         </div>
       </div>
     `;
@@ -586,7 +569,7 @@ function renderSchedule() {
   document.getElementById('schedule-container').innerHTML = html;
 }
 
-// ========== MANIFESTATION / RITUALS ==========
+// ========== RITUALS ==========
 let rituals = [];
 
 function loadRituals() {
@@ -595,10 +578,10 @@ function loadRituals() {
     rituals = JSON.parse(saved);
   } else {
     rituals = [
-      { id: 1, title: "Morning Champion", desc: "06:00 Wake • Cold Shower • Fajr + Quran (20-25 min) • BT Block Focus" },
-      { id: 2, title: "Discipline Stack", desc: "No phone first 30min • Study continuous (no task switching) • Hard prayer stops" },
-      { id: 3, title: "Evening Ritual", desc: "21:00 Prep • 21:30 Partner Session • 23:00 Journal • 23:30 Night Close" },
-      { id: 4, title: "Exam Season Mindset", desc: "High priority first • Past papers week 3 • Gym optional, never forced" }
+      { id: 1, title: "Morning Champion", desc: "06:00 Wake\nCold Shower\nFajr + Quran (20-25 min)\nBT Block Focus" },
+      { id: 2, title: "Discipline Stack", desc: "No phone first 30min\nStudy continuous (no task switching)\nHard prayer stops" },
+      { id: 3, title: "Evening Ritual", desc: "21:00 Prep\n21:30 Partner Session\n23:00 Journal\n23:30 Night Close" },
+      { id: 4, title: "Exam Season Mindset", desc: "High priority first\nPast papers week 3\nGym optional, never forced" }
     ];
     saveRituals();
   }
@@ -611,6 +594,10 @@ function saveRituals() {
 }
 
 function renderRituals() {
+  if (rituals.length === 0) {
+    document.getElementById('rituals-container').innerHTML = '<div style="background:var(--s1); border-radius:16px; padding:40px; text-align:center; color:var(--text3)">No rituals yet. Add your future self habits.</div>';
+    return;
+  }
   let html = '<div class="manifest-container">';
   rituals.forEach((r, idx) => {
     html += `
@@ -620,8 +607,8 @@ function renderRituals() {
           ${r.desc.split('\n').map(line => `<li>${escapeHtml(line)}</li>`).join('')}
         </div>
         <div style="display:flex; gap:8px; margin-top:16px;">
-          <button class="habit-edit" onclick="editRitual(${idx})" style="background:var(--s3); border:none; border-radius:6px; padding:4px 12px; cursor:pointer;">✎ Edit</button>
-          <button class="habit-delete" onclick="deleteRitual(${idx})" style="background:var(--s3); border:none; border-radius:6px; padding:4px 12px; cursor:pointer;">🗑 Delete</button>
+          <button class="ritual-edit" onclick="editRitual(${idx})">✎ Edit</button>
+          <button class="ritual-delete" onclick="deleteRitual(${idx})">🗑 Delete</button>
         </div>
       </div>
     `;
@@ -688,7 +675,7 @@ function renderNotes() {
     return;
   }
   let html = '<div class="notes-container">';
-  notes.sort((a,b) => new Date(b.date) - new Date(a.date)).forEach((note, idx) => {
+  [...notes].sort((a,b) => new Date(b.date) - new Date(a.date)).forEach((note, idx) => {
     html += `
       <div class="note-card">
         <div class="note-header">
@@ -743,6 +730,44 @@ function deleteNote(idx) {
   }
 }
 
+// ========== POMODORO TIMER ==========
+let pomoTimer = null;
+let pomoTime = 25 * 60;
+let pomoRunning = false;
+
+function updatePomoDisplay() {
+  const mins = Math.floor(pomoTime / 60);
+  const secs = pomoTime % 60;
+  document.getElementById('pomo-time').textContent = `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+}
+
+function startPomodoro() {
+  if (pomoRunning) return;
+  pomoRunning = true;
+  pomoTimer = setInterval(() => {
+    if (pomoTime > 0) {
+      pomoTime--;
+      updatePomoDisplay();
+    } else {
+      clearInterval(pomoTimer);
+      pomoRunning = false;
+      alert('Time is up! Take a break.');
+    }
+  }, 1000);
+}
+
+function pausePomodoro() {
+  clearInterval(pomoTimer);
+  pomoRunning = false;
+}
+
+function resetPomodoro() {
+  clearInterval(pomoTimer);
+  pomoRunning = false;
+  pomoTime = 25 * 60;
+  updatePomoDisplay();
+}
+
 // ========== UTILITIES ==========
 function closeMod(id) { document.getElementById(id).classList.remove('on'); }
 function showSaveIndicator() {
@@ -752,15 +777,13 @@ function showSaveIndicator() {
 }
 function escapeHtml(str) { return str ? str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])) : ''; }
 
-// ========== STATS (mock for tracker) ==========
-document.getElementById('stat-habits').textContent = '8';
-
 // ========== INIT ==========
 loadTheme();
 loadSidebarState();
 loadRituals();
 loadNotes();
 renderSchedule();
+updatePomoDisplay();
 </script>
 </body>
 </html>
